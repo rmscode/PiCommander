@@ -68,6 +68,6 @@ echo "pi:$password1" | sudo chpasswd
 sudo sh -c 'echo "dtparam=watchdog=on" >> /boot/config.txt'
 
 # Create cron job to execute watchdog-config.sh after reboot
-(crontab -l ; echo "@reboot /home/pi/PiCommaner/scripts/watchdog-config.sh") | crontab -
+(crontab -l ; echo "@reboot /home/pi/PiCommander/scripts/watchdog-config.sh") | crontab -
 sudo reboot now
 
