@@ -44,10 +44,19 @@ jq '. |= . + {"overscan": {"horizontal": 0, "vertical": 0, "disable_overscan": t
 
 ## END modifying _settings.json file
 
+# Prompt user for name of first playlist and store in variable
+read -p "Enter the name of the first playlist you would like to create: " playlistName
+
+# Prompt user for the name of the weblink asset for the playlist and store in variable
+read -p "Enter the name of the weblink asset you would like to create to use with your plylist: " assetName
+
+# Prompt the user for the URL of the weblink asset and store in variable
+read -p "Enter the URL of the weblink asset you would like to create to use with your plylist: " assetURL
+
 # Create a default playlist
-cat > /home/pi/media/__Default_Playlist.json<< EOF
+cat > /home/pi/media/__$playlistName.json<< EOF
 {
-    "name": "Default_Playlist",
+    "name": "$playlistName",
     "settings": {
         "ticker": {
             "enable": false,
@@ -72,7 +81,7 @@ cat > /home/pi/media/__Default_Playlist.json<< EOF
     },
     "assets": [
         {
-            "filename": "Default_Asset.weblink",
+            "filename": "$assetName.weblink",
             "duration": 46800,
             "selected": true,
             "option": {
@@ -93,11 +102,11 @@ cat > /home/pi/media/__Default_Playlist.json<< EOF
 EOF
 
 # Create a default asset
-cat > /home/pi/media/Default_Asset.weblink<< EOF
+cat > /home/pi/media/$assetName.weblink<< EOF
 {
-    "name": "Default_Asset",
+    "name": "$assetName",
     "type": ".weblink",
-    "link": "https://google.com",
+    "link": "$assetURL",
     "duration": null,
     "hideTitle": "title",
     "zoom": 1,
