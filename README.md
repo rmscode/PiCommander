@@ -1,5 +1,5 @@
 # About
-A simple set of scripts that will complete some basic system configuration tasks for a fresh install of PiSignage on a Raspberry Pi. Tested on a Raspberry Pi 3 and 4 running PiSignage 3.2.0.
+A simple set of scripts that will automate some basic system configuration tasks for a fresh install of PiSignage on a Raspberry Pi. Tested on a Raspberry Pi 3 and 4 running PiSignage 3.2.0.
 
 ## Features
 - [x] Sets system & bash_profile timezone to "America/New_York" (change as needed)
