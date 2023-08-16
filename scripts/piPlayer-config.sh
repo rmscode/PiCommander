@@ -22,8 +22,27 @@ mv /home/pi/.bash_profile_new /home/pi/.bash_profile
 # Change the system timezone
 sudo timedatectl set-timezone America/New_York
 
-# Parse _settings.json file and modify the automatic reboot setting - 00:00 AM every day
+## BEGIN Modifying _settings.json file
+
+# Configure the on/off schedule
+jq '.sleep |= . + {"ontime": "06:50", "offtime": "18:50", "enable": true, "ontimeObj": "1969-12-31T11:50:00.000Z", "offtimeObj": "1969-12-31T23:50:00.000Z"}' /home/pi/piSignagePro/config/_settings.json > tmp.json && mv tmp.json /home/pi/piSignagePro/config/_settings.json
+
+# Configure automatic reboots
 jq '.reboot |= . + {"enable": true, "time": "1970-01-01T00:00:00.000Z", "absoluteTime": "09:00"}' /home/pi/piSignagePro/config/_settings.json > tmp.json && mv tmp.json /home/pi/piSignagePro/config/_settings.json
+
+# Set the player hostname 
+jq '. |= . + {"localName": "PiPlayer"}' /home/pi/piSignagePro/config/_settings.json > tmp.json && mv tmp.json /home/pi/piSignagePro/config/_settings.json
+
+# Set the player note
+jq '. |= . + {"note": ". . ."}' /home/pi/piSignagePro/config/_settings.json > tmp.json && mv tmp.json /home/pi/piSignagePro/config/_settings.json
+
+# Configure the wifi settings
+jq '. |= . + {"wifi": {"ip": null, "countryCode": "US", "apmode": "NO"}}' /home/pi/piSignagePro/config/_settings.json > tmp.json && mv tmp.json /home/pi/piSignagePro/config/_settings.json
+
+# Configure overscan
+jq '. |= . + {"overscan": {"horizontal": 0, "vertical": 0, "disable_overscan": true}}' /home/pi/piSignagePro/config/_settings.json > tmp.json && mv tmp.json /home/pi/piSignagePro/config/_settings.json
+
+## END modifying _settings.json file
 
 # Create a default playlist
 cat > /home/pi/media/__Default_Playlist.json<< EOF
