@@ -5,6 +5,7 @@ A simple set of scripts that will automate some basic system configuration tasks
 - [x] Sets system & bash_profile timezone to "America/New_York" (change as needed)
 - [x] Modifies _settings.json to enable automatic daily reboots
 - [x] Enables and configures the watchdog timer for automatic rebooting if the system hangs
+- [x] Various user prompts to aid creation of playlist and asset
 - [x] Prompts user to change default system password
 - [x] Self cleaning . . . removes itself from the system after running 
 
