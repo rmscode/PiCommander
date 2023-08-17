@@ -157,7 +157,7 @@ done
 echo "pi:$password1" | sudo chpasswd
 
 # Change the PiSignage WebUI password to match the system password
-curl -X POST -H "Content-Type: application/json" -H "Authorization: Basic cGk6cGK=" -d '{"user": {"name": "pi", "newpasswd": "$password1"}}' http://localhost:8000/api/settings/user
+curl -X POST -H "Content-Type: application/json" -H "Authorization: Basic cGk6cGK=" -d "{\"user\": {\"name\": \"pi\", \"newpasswd\": \"$password1\"}}" http://localhost:8000/api/settings/user
 
 # Enable the watchdog timer
 sudo sh -c 'echo "dtparam=watchdog=on" >> /boot/config.txt'
