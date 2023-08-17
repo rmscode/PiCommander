@@ -14,4 +14,4 @@ A simple set of scripts that will automate some basic system configuration tasks
    1. Git: `git clone https://github.com/rmscode/PiCommander.git`
    2. Github CLI: `gh repo clone rmscode/PiCommander`
 2. Make the script executable: `sudo chmod +x PiCommander/scripts/piPlayer-config.sh`
-3. Run the script: `./PiCommader/scripts/piPlayer-config.sh`
+3. Run the script: `sudo ./PiCommader/scripts/piPlayer-config.sh`
