@@ -114,6 +114,9 @@ cat > /home/pi/media/$assetName.weblink<< EOF
 }
 EOF
 
+## Start playlist via API
+curl -X POST -H "Content-Type: application/json" -H "Authorization: Basic cGk6cGK=" -d '{"play": "true"}' http://localhost:8000/api/play/playlists/$playlistName
+
 # Parse command line arguments
 while [[ $# -gt 0 ]]
 do
