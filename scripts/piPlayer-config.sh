@@ -48,10 +48,10 @@ jq '. |= . + {"overscan": {"horizontal": 0, "vertical": 0, "disable_overscan": t
 read -p "Enter the name of the first playlist you would like to create: " playlistName
 
 # Prompt user for the name of the weblink asset for the playlist and store in variable
-read -p "Enter the name of the weblink asset you would like to create to use with your plylist: " assetName
+read -p "Enter the name of a weblink asset to use with the playlist $playlistName: " assetName
 
 # Prompt the user for the URL of the weblink asset and store in variable
-read -p "Enter the URL of the weblink asset you would like to create to use with your plylist: " assetURL
+read -p "Enter a URL to use with the $assetName asset: " assetURL
 
 # Create a default playlist
 cat > /home/pi/media/__$playlistName.json<< EOF
