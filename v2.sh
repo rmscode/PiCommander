@@ -339,24 +339,31 @@ echo -e "${GREEN}
 Starting the playlist '$playlistName' for the first time. This will make it the default playlist that starts when the player boots up.
 ${NC}"
 curl -s -X POST -H "Content-Type: application/json" -H "Authorization: Basic cGk6cGK=" -d '{"play": "true"}' http://localhost:8000/api/play/playlists/$playlistName | jq .
+echo -e ""
 
 
 # Changing the system and WebUI password
 echo -e "Changing the system/WebUI password . . ."
 echo "pi:$newPassword" | sudo chpasswd
-
 curl -s -X POST -H "Content-Type: application/json" -H "Authorization: Basic cGk6cGK=" -d "{\"user\": {\"name\": \"pi\", \"newpasswd\": \"$newPassword\"}}" http://localhost:8000/api/settings/user | jq .
+echo -e ""
 
 # Make the watchdog-config.sh script executable
 sudo chmod +x /home/pi/PiCommander/scripts/watchdog-config.sh
 
 # Enable the watchdog timer
-echo -e "Enabling the watchdog timer . . ."
+echo -e "${GREEN}
+Enabling the watchdog timer . . .
+${NC}"
 sudo bash -c 'echo "dtparam=watchdog=on" >> /boot/config.txt'
+echo -e ""
 
 # Create cron job to execute watchdog-config.sh after reboot
-echo -e "Creating cron job to execute watchdog-config.sh after rebooting . . ."
-sudo (crontab -l ; echo "@reboot /home/pi/PiCommander/scripts/watchdog-config.sh") | crontab -
+echo -e "${GREEN}
+Creating cron job to execute watchdog-config.sh after rebooting . . .
+${NC}"
+sudo bash -c '(crontab -l ; echo "@reboot /home/pi/PiCommander/scripts/watchdog-config.sh") | crontab -'
+echo -e ""
 
 echo -e "${GREEN}
 We're finished! The system will reboot in 5 seconds.
