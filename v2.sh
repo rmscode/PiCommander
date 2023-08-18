@@ -190,7 +190,6 @@ if [[ "$response" =~ ^[Nn]$ ]]; then
   echo -e "${RED}
   The On/Off schedule will not enabled!
   ${NC}"
-  echo -e ""
 else
   echo -e "${GREEN}
   The On/Off schedule will be enabled!
@@ -205,9 +204,8 @@ read -r -p "Do you want to enable automatic system reboots? [Y/n]: " response </
 if [[ "$response" =~ ^[Nn]$ ]]; then
   rebootTime=""
   echo -e "${RED}
-  Automatic system reboots will not beenabled!
+  Automatic system reboots will not be enabled!
   ${NC}"
-  echo -e ""
 else
   echo -e "${GREEN}
   Automatic system reboots will be enabled!
@@ -235,10 +233,14 @@ if [ "$newPassword" != "$confirmPassword" ]; then
 fi
 
 # Setting the hostname
-echo -e "Setting the hostname to '$piName' . . ."
+echo -e "${GREEN}
+Setting the hostname to '$piName' . . .
+${NC}"
 
 # Setting the time zone
-echo -e "Setting the time zone to '$timeZone' . . ."
+echo -e "${GREEN}
+Setting the time zone to '$timeZone' . . .
+${NC}"
 sudo bash -c 'while read line; do
   if [[ $line == export\ TZ=* ]]; then
     line="export TZ='America/New_York'"
@@ -251,18 +253,24 @@ timedatectl
 
 # Setting the On/Off schedule
 if [ -n "$onTime" ]; then
-  echo -e "Setting the On/Off schedule to '$onTime' - '$offTime' . . ."
+  echo -e "${GREEN}
+  Setting the On/Off schedule to '$onTime' - '$offTime' . . .
+  ${NC}"
   jq --arg onTime "$onTime" --arg offTime "$offTime" '.sleep |= . + {"ontime": $onTime, "offtime": "18:50", "enable": true, "ontimeObj": "1969-12-31T11:50:00.000Z", "offtimeObj": "1969-12-31T23:50:00.000Z"}' /home/pi/piSignagePro/config/_settings.json > tmp.json && mv tmp.json /home/pi/piSignagePro/config/_settings.json
 fi
 
 # Setting automatic system reboots
 if [ -n "$rebootTime" ]; then
-   echo -e "Setting automatic system reboots to '$rebootTime' . . ."
+   echo -e "${GREEN}
+   Setting automatic system reboots to '$rebootTime' . . .
+   ${NC}"
    jq --arg rebootTime "${rebootTime}" '.reboot |= . + {"enable": true, "time": "1970-01-01T'"${rebootTime}"':00.000Z", "absoluteTime": "09:00"}' /home/pi/piSignagePro/config/_settings.json > tmp.json && mv tmp.json /home/pi/piSignagePro/config/_settings.json
 fi
 
 # Creating playlist
-echo -e "Creating playlist '$playlistName' . . ."
+echo -e "${GREEN}
+Creating playlist '$playlistName' . . .
+${NC}"
 cat > /home/pi/media/__$playlistName.json<< EOF
 {
     "name": "$playlistName",
@@ -311,7 +319,9 @@ cat > /home/pi/media/__$playlistName.json<< EOF
 EOF
 
 # Creating asset
-echo -e "Creating weblink asset '$assetName' with url '$assetURL' . . ."
+echo -e "${GREEN}
+Creating weblink asset '$assetName' with url '$assetURL' . . .
+${NC}"
 cat > /home/pi/media/$assetName.weblink<< EOF
 {
     "name": "$assetName",
@@ -325,26 +335,28 @@ cat > /home/pi/media/$assetName.weblink<< EOF
 EOF
 
 # Starting the playlist
-echo -e "Starting the playlist '$playlistName' for the first time. This will make it the default playlist that starts when the player boots up."
-curl -s -X POST -H "Content-Type: application/json" -H "Authorization: Basic cGk6cGK=" -d '{"play": "true"}' http://localhost:8000/api/play/playlists/$playlistName
+echo -e "${GREEN}
+Starting the playlist '$playlistName' for the first time. This will make it the default playlist that starts when the player boots up.
+${NC}"
+curl -s -X POST -H "Content-Type: application/json" -H "Authorization: Basic cGk6cGK=" -d '{"play": "true"}' http://localhost:8000/api/play/playlists/$playlistName | jq .
 
 
 # Changing the system and WebUI password
 echo -e "Changing the system/WebUI password . . ."
 echo "pi:$newPassword" | sudo chpasswd
 
-curl -s -X POST -H "Content-Type: application/json" -H "Authorization: Basic cGk6cGK=" -d "{\"user\": {\"name\": \"pi\", \"newpasswd\": \"$newPassword\"}}" http://localhost:8000/api/settings/user
+curl -s -X POST -H "Content-Type: application/json" -H "Authorization: Basic cGk6cGK=" -d "{\"user\": {\"name\": \"pi\", \"newpasswd\": \"$newPassword\"}}" http://localhost:8000/api/settings/user | jq .
 
 # Make the watchdog-config.sh script executable
 sudo chmod +x /home/pi/PiCommander/scripts/watchdog-config.sh
 
 # Enable the watchdog timer
 echo -e "Enabling the watchdog timer . . ."
-sudo echo "dtparam=watchdog=on" >> /boot/config.txt
+sudo bash -c 'echo "dtparam=watchdog=on" >> /boot/config.txt'
 
 # Create cron job to execute watchdog-config.sh after reboot
 echo -e "Creating cron job to execute watchdog-config.sh after rebooting . . ."
-(crontab -l ; echo "@reboot /home/pi/PiCommander/scripts/watchdog-config.sh") | crontab -
+sudo (crontab -l ; echo "@reboot /home/pi/PiCommander/scripts/watchdog-config.sh") | crontab -
 
 echo -e "${GREEN}
 We're finished! The system will reboot in 5 seconds.
