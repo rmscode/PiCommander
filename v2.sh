@@ -119,13 +119,13 @@ case $response in
 
 *)
 start_spinner "Performing ${GREEN}apt-get update${NC}";
-apt-get update > /dev/null;
+sudo apt-get update > /dev/null;
 stop_spinner $?;
 WGET=$(dpkg-query -W -f='${Status}' wget 2>/dev/null | grep -c "ok installed")
   if [ $(dpkg-query -W -f='${Status}' wget 2>/dev/null | grep -c "ok installed") -eq 0 ];
   then
     start_spinner "${YELLOW}Installing wget${NC}"
-    apt-get install wget --yes > /dev/null;
+    sudo apt-get install wget --yes > /dev/null;
     stop_spinner $?
     elif [ $(dpkg-query -W -f='${Status}' wget 2>/dev/null | grep -c "ok installed") -eq 1 ];
     then
@@ -135,7 +135,7 @@ GIT=$(dpkg-query -W -f='${Status}' git 2>/dev/null | grep -c "ok installed")
   if [ $(dpkg-query -W -f='${Status}' git 2>/dev/null | grep -c "ok installed") -eq 0 ];
   then
     start_spinner "${YELLOW}Installing git${NC}"
-    apt-get install git --yes > /dev/null;
+    sudo apt-get install git --yes > /dev/null;
     stop_spinner $?
     elif [ $(dpkg-query -W -f='${Status}' git 2>/dev/null | grep -c "ok installed") -eq 1 ];
     then
@@ -145,7 +145,7 @@ CURL=$(dpkg-query -W -f='${Status}' curl 2>/dev/null | grep -c "ok installed")
   if [ $(dpkg-query -W -f='${Status}' curl 2>/dev/null | grep -c "ok installed") -eq 0 ];
   then
     start_spinner "${YELLOW}Installing curl${NC}"
-    apt-get install curl --yes > /dev/null;
+    sudo apt-get install curl --yes > /dev/null;
     stop_spinner $?
     elif [ $(dpkg-query -W -f='${Status}' curl 2>/dev/null | grep -c "ok installed") -eq 1 ];
     then
@@ -155,7 +155,7 @@ JQ=$(dpkg-query -W -f='jq${Status}' jq 2>/dev/null | grep -c "ok installed")
   if [ $(dpkg-query -W -f='${Status}' jq 2>/dev/null | grep -c "ok installed") -eq 0 ];
   then
     start_spinner "${YELLOW}Installing jq${NC}"
-    apt-get install jq --yes > /dev/null;
+    sudo apt-get install jq --yes > /dev/null;
     stop_spinner $?
     elif [ $(dpkg-query -W -f='${Status}' jq 2>/dev/null | grep -c "ok installed") -eq 1 ];
     then
@@ -165,7 +165,7 @@ WATCHDOG=$(dpkg-query -W -f='${Status}' watchdog 2>/dev/null | grep -c "ok insta
   if [ $(dpkg-query -W -f='${Status}' watchdog 2>/dev/null | grep -c "ok installed") -eq 0 ];
   then
     start_spinner "${YELLOW}Installing watchdog${NC}"
-    apt-get install WATCHDOG --yes > /dev/null;
+    sudo apt-get install WATCHDOG --yes > /dev/null;
     stop_spinner $?
     elif [ $(dpkg-query -W -f='${Status}' watchdog 2>/dev/null | grep -c "ok installed") -eq 1 ];
     then
