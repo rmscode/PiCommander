@@ -160,9 +160,9 @@ echo "pi:$password1" | sudo chpasswd
 curl -X POST -H "Content-Type: application/json" -H "Authorization: Basic cGk6cGK=" -d "{\"user\": {\"name\": \"pi\", \"newpasswd\": \"$password1\"}}" http://localhost:8000/api/settings/user
 
 # Enable the watchdog timer
-sudo sh -c 'echo "dtparam=watchdog=on" >> /boot/config.txt'
+sudo bash -c 'echo "dtparam=watchdog=on" >> /boot/config.txt'
 
 # Create cron job to execute watchdog-config.sh after reboot
-(crontab -l ; echo "@reboot /home/pi/PiCommander/scripts/watchdog-config.sh") | crontab -
+sudo (crontab -l ; echo "@reboot /home/pi/PiCommander/scripts/watchdog-config.sh") | crontab -
 sudo reboot now
 
