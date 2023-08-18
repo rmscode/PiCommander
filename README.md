@@ -1,3 +1,11 @@
+
+  dBBBBBb  dBP dBBBP  dBBBBP dBBBBBBb  dBBBBBBb dBBBBBb     dBBBBb  dBBBBb  dBBBP dBBBBBb
+      dB'            dBP.BP       dBP       dBP      BB        dBP     dBP            dBP
+  dBBBP' dBP dBP    dBP.BP dBPdBPdBP dBPdBPdBP   dBP BB   dBP dBP dBP dBP dBBP    dBBBBK 
+ dBP    dBP dBP    dBP.BP dBPdBPdBP dBPdBPdBP   dBP  BB  dBP dBP dBP dBP dBP     dBP  BB 
+dBP    dBP dBBBBP dBBBBP dBPdBPdBP dBPdBPdBP   dBBBBBBB dBP dBP dBBBBBP dBBBBP  dBP  dB'
+=======================================================================================
+
 # About
 A simple set of scripts that will automate some basic system configuration tasks for a fresh install of [PiSignage](https://github.com/colloqi/pisignage) on a Raspberry Pi. Tested on a Raspberry Pi 3 and 4 running PiSignage 3.2.0.
 
@@ -13,5 +21,5 @@ A simple set of scripts that will automate some basic system configuration tasks
 1. Clone the repository using git or github cli. (git is probably already installed by default)
    1. Git: `git clone https://github.com/rmscode/PiCommander.git`
    2. Github CLI: `gh repo clone rmscode/PiCommander`
-2. Make the script executable: `sudo chmod +x PiCommander/scripts/piPlayer-config.sh`
-3. Run the script: `sudo ./PiCommader/scripts/piPlayer-config.sh`
+2. Make the script executable: `chmod +x PiCommander/scripts/piPlayer-config.sh`
+3. Run the script: `./PiCommader/scripts/piPlayer-config.sh`
