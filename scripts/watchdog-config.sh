@@ -10,5 +10,5 @@ systemctl enable watchdog
 systemctl start watchdog
 
 # Cleanup
-(crontab -l | grep -v "/home/pi/PiCommander/scripts/watchdog-config.sh") | crontab -
+sudo (crontab -l | grep -v "/home/pi/PiCommander/scripts/watchdog-config.sh") | crontab -
 rm -rf /home/pi/PiCommander
