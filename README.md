@@ -1,11 +1,3 @@
-
-  dBBBBBb  dBP dBBBP  dBBBBP dBBBBBBb  dBBBBBBb dBBBBBb     dBBBBb  dBBBBb  dBBBP dBBBBBb
-      dB'            dBP.BP       dBP       dBP      BB        dBP     dBP            dBP
-  dBBBP' dBP dBP    dBP.BP dBPdBPdBP dBPdBPdBP   dBP BB   dBP dBP dBP dBP dBBP    dBBBBK 
- dBP    dBP dBP    dBP.BP dBPdBPdBP dBPdBPdBP   dBP  BB  dBP dBP dBP dBP dBP     dBP  BB 
-dBP    dBP dBBBBP dBBBBP dBPdBPdBP dBPdBPdBP   dBBBBBBB dBP dBP dBBBBBP dBBBBP  dBP  dB'
-=======================================================================================
-
 # About
 A simple set of scripts that will automate some basic system configuration tasks for a fresh install of [PiSignage](https://github.com/colloqi/pisignage) on a Raspberry Pi. Tested on a Raspberry Pi 3 and 4 running PiSignage 3.2.0.
 
