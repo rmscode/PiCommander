@@ -12,3 +12,5 @@ theme:
       previous: 80 # p
       search: 83   # s
 
+plugins:
+  - search
